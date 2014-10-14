@@ -13,7 +13,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 /// expands the expression X
 #define NS_EXPAND(X) X
-
+/// concatenates to elements
+#define NS_CONCAT(X,Y) X##Y
 /// helper
 #define NS_NUM_ARGS_(X100, X99, X98, X97, X96, X95, X94, X93, X92, X91, X90, X89, X88, X87, X86, X85, X84, X83, X82, X81, X80, X79, X78, X77, X76, X75, X74, X73, X72, X71, X70, X69, X68, X67, X66, X65, X64, X63, X62, X61, X60, X59, X58, X57, X56, X55, X54, X53, X52, X51, X50, X49, X48, X47, X46, X45, X44, X43, X42, X41, X40, X39, X38, X37, X36, X35, X34, X33, X32, X31, X30, X29, X28, X27, X26, X25, X24, X23, X22, X21, X20, X19, X18, X17, X16, X15, X14, X13, X12, X11, X10, X9, X8, X7, X6, X5, X4, X3, X2, X1, N, ...)   N
 /// expands to the number of arguments passed to the macro or rather the number of commas + 1
@@ -40,14 +41,14 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 /// e.g.  #define MYOP(X) X##X 
 ///       NS_REDUCE(MYOP,_,a,b,c) will expand to aa_bb_cc
 #define NS_REDUCE(M,SEPARATOR,...) NS_REDUCE_N(NS_NUM_ARGS(__VA_ARGS__),M,SEPARATOR,__VA_ARGS__)
-
+/// macro which does nothing but expand X
 
 #define NS_NAMESPACE_PREPEND_NAMESPACE(X) namespace X {
 #define NS_NAMESPACE_APPEND_NAMESPACE(X) }
 
 #define NS_NAMESPACE_BEGIN(...) NS_REDUCE(NS_NAMESPACE_PREPEND_NAMESPACE, , __VA_ARGS__)
 #define NS_NAMESPACE_END(...) NS_REDUCE(NS_NAMESPACE_APPEND_NAMESPACE, ,__VA_ARGS__)
-#define NS_NAMESPACE(...) NS_REDUCE(NS_NOOP, ::, __VA_ARGS__)
+#define NS_NAMESPACE(...) NS_REDUCE(NS_EXPAND, ::, __VA_ARGS__)
 #define NS_NAMESPACE_USE(...) using namespace NS_NAMESPACE(__VA_ARGS__)
 
 /// renamed macros for ease of use

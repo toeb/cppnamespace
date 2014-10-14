@@ -1,4 +1,4 @@
-#include <cppnamespace.h>
+#include <cppnamespace/cppnamespace.h>
 
 /// defines which for naming the namespaces, allows the parameterized buildup of naming schemes 
 #define BASE_NAMESPACE matlib  
@@ -24,6 +24,7 @@ int main(){
 // using directive to access Vector
  NS_USE(VECTOR_NAMESPACE);
 
+ 
  Vector v;
  //global qualification for matrix - also works without using the preprocessor (but makes the code more brittle) 
  ::matlib::matrix::Matrix m;

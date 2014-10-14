@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 2.8.7)
 
-include_directories(.)
-add_executable(test main.cpp cppnamespace.h)
+project(cppnamespace)
+file(GLOB_RECURSE files includes/**.h)
+
+include_directories(includes)
+add_executable(cppnamespace.test main.cpp ${files})
 enable_testing()
-add_test(namespace.test COMMAND test)
+add_test(cppnamespace.test COMMAND cppnamespace.test)
