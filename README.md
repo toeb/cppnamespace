@@ -1,4 +1,5 @@
 # cppnamespace
+![cppnamespace logo](/cppnamespacelogo.png "cppnamespace logo")
 
 ## Motiviation
 
